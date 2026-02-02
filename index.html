@@ -1,119 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Be My Valentine?</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      overflow: hidden;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Be My Valentine?</title>
 
-    .box {
-      text-align: center;
-      background: white;
-      padding: 40px 60px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      position: relative;
-    }
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    overflow: hidden;
+  }
 
-    h1 {
-      color: #ff4d6d;
-      margin-bottom: 30px;
-    }
+  .box {
+    text-align: center;
+    background: white;
+    padding: 50px 70px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    position: relative;
+    width: 500px;
+  }
 
-    .btn-container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      position: relative;
-      height: 60px;
-    }
+  h1 {
+    color: #ff4d6d;
+    margin-bottom: 40px;
+  }
 
-    button {
-      padding: 12px 28px;
-      font-size: 18px;
-      border-radius: 30px;
-      border: none;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+  .btn-area {
+    position: relative;
+    height: 80px;
+  }
 
-    #yesBtn {
-      background-color: #ff4d6d;
-      color: white;
-    }
+  .btn-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
 
-    #yesBtn:hover {
-      transform: scale(1.1);
-    }
+  button {
+    width: 120px;
+    height: 50px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+  }
 
-    #noBtn {
-      background-color: #ccc;
-      color: black;
-      position: absolute;
-    }
+  #yesBtn {
+    background-color: #ff4d6d;
+    color: white;
+  }
 
-    .message {
-      margin-top: 25px;
-      font-size: 20px;
-      color: #ff4d6d;
-      display: none;
-    }
-  </style>
+  #yesBtn:hover {
+    transform: scale(1.1);
+  }
+
+  #noBtn {
+    background-color: #ccc;
+    color: black;
+    position: absolute;
+  }
+
+  .message {
+    margin-top: 25px;
+    font-size: 20px;
+    color: #ff4d6d;
+    display: none;
+  }
+</style>
 </head>
+
 <body>
 
-  <div class="box">
-    <h1>Will you be my Valentine? 💖</h1>
+<div class="box">
+  <h1>Will you be my Valentine? 💖</h1>
 
-    <div class="btn-container">
+  <div class="btn-area">
+    <div class="btn-row">
       <button id="yesBtn">Yes 😍</button>
       <button id="noBtn">No 😜</button>
     </div>
-
-    <div class="message" id="msg">Yayyyy!!! You made my day 🥰💘</div>
   </div>
 
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const msg = document.getElementById("msg");
-    const container = document.querySelector(".btn-container");
+  <div class="message" id="msg">Yayyyy!!! You made my day 🥰💘</div>
+</div>
 
-    function moveButton() {
-      const rect = container.getBoundingClientRect();
-      const maxX = rect.width - noBtn.offsetWidth;
-      const maxY = rect.height - noBtn.offsetHeight;
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const msg = document.getElementById("msg");
+  const area = document.querySelector(".btn-area");
 
-      const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
+  function moveButton() {
+    const rect = area.getBoundingClientRect();
+    const maxX = rect.width - noBtn.offsetWidth;
+    const maxY = rect.height - noBtn.offsetHeight;
 
-      noBtn.style.left = randomX + "px";
-      noBtn.style.top = randomY + "px";
-    }
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
 
-    noBtn.addEventListener("mouseover", moveButton);
-    noBtn.addEventListener("click", moveButton);
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+  }
 
-    yesBtn.addEventListener("click", () => {
-      msg.style.display = "block";
-      yesBtn.innerText = "Yay! 💖";
-      noBtn.style.display = "none"; // 👈 No disappears
-    });
+  noBtn.addEventListener("mouseover", moveButton);
+  noBtn.addEventListener("click", moveButton);
 
-    // Place No beside Yes initially
-    noBtn.style.left = "140px";
-    noBtn.style.top = "0px";
-  </script>
+  yesBtn.addEventListener("click", () => {
+    msg.style.display = "block";
+    noBtn.style.display = "none";
+    yesBtn.innerText = "Yay! 💖";
+  });
+
+  // Initial position beside Yes
+  noBtn.style.left = "140px";
+  noBtn.style.top = "15px";
+</script>
 
 </body>
 </html>
