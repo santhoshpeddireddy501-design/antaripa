@@ -30,6 +30,14 @@
       margin-bottom: 30px;
     }
 
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      height: 60px;
+    }
+
     button {
       padding: 12px 28px;
       font-size: 18px;
@@ -37,7 +45,6 @@
       border: none;
       cursor: pointer;
       transition: 0.2s;
-      margin: 10px;
     }
 
     #yesBtn {
@@ -67,8 +74,12 @@
 
   <div class="box">
     <h1>Will you be my Valentine? 💖</h1>
-    <button id="yesBtn">Yes 😍</button>
-    <button id="noBtn">No 😜</button>
+
+    <div class="btn-container">
+      <button id="yesBtn">Yes 😍</button>
+      <button id="noBtn">No 😜</button>
+    </div>
+
     <div class="message" id="msg">Yayyyy!!! You made my day 🥰💘</div>
   </div>
 
@@ -76,12 +87,12 @@
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const msg = document.getElementById("msg");
-    const box = document.querySelector(".box");
+    const container = document.querySelector(".btn-container");
 
     function moveButton() {
-      const boxRect = box.getBoundingClientRect();
-      const maxX = boxRect.width - noBtn.offsetWidth;
-      const maxY = boxRect.height - noBtn.offsetHeight;
+      const rect = container.getBoundingClientRect();
+      const maxX = rect.width - noBtn.offsetWidth;
+      const maxY = rect.height - noBtn.offsetHeight;
 
       const randomX = Math.random() * maxX;
       const randomY = Math.random() * maxY;
@@ -96,10 +107,12 @@
     yesBtn.addEventListener("click", () => {
       msg.style.display = "block";
       yesBtn.innerText = "Yay! 💖";
+      noBtn.style.display = "none"; // 👈 No disappears
     });
 
-    // Initial position for No button
-    moveButton();
+    // Place No beside Yes initially
+    noBtn.style.left = "140px";
+    noBtn.style.top = "0px";
   </script>
 
 </body>
