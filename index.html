@@ -23,7 +23,6 @@
     padding: 50px 70px;
     border-radius: 25px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-    position: relative;
     width: 500px;
   }
 
@@ -35,11 +34,9 @@
   .btn-area {
     position: relative;
     height: 80px;
-  }
-
-  .btn-row {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 20px;
   }
 
@@ -65,7 +62,7 @@
   #noBtn {
     background-color: #ccc;
     color: black;
-    position: absolute;
+    position: relative; /* important */
   }
 
   .message {
@@ -82,11 +79,9 @@
 <div class="box">
   <h1>Will you be my Valentine? 💖</h1>
 
-  <div class="btn-area">
-    <div class="btn-row">
-      <button id="yesBtn">Yes 😍</button>
-      <button id="noBtn">No 😜</button>
-    </div>
+  <div class="btn-area" id="area">
+    <button id="yesBtn">Yes 😍</button>
+    <button id="noBtn">No 😜</button>
   </div>
 
   <div class="message" id="msg">Yayyyy!!! You made my day 🥰💘</div>
@@ -96,7 +91,7 @@
   const noBtn = document.getElementById("noBtn");
   const yesBtn = document.getElementById("yesBtn");
   const msg = document.getElementById("msg");
-  const area = document.querySelector(".btn-area");
+  const area = document.getElementById("area");
 
   function moveButton() {
     const rect = area.getBoundingClientRect();
@@ -106,6 +101,7 @@
     const randomX = Math.random() * maxX;
     const randomY = Math.random() * maxY;
 
+    noBtn.style.position = "absolute";
     noBtn.style.left = randomX + "px";
     noBtn.style.top = randomY + "px";
   }
@@ -118,10 +114,6 @@
     noBtn.style.display = "none";
     yesBtn.innerText = "Yay! 💖";
   });
-
-  // Initial position beside Yes
-  noBtn.style.left = "140px";
-  noBtn.style.top = "15px";
 </script>
 
 </body>
