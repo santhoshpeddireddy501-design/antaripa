@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Be My Valentine?</title>
+<title>Be My Valentine, Antaripa!</title>
 
 <style>
   body {
@@ -24,12 +24,12 @@
     border-radius: 25px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     width: 500px;
-    min-height: 300px;
+    min-height: 350px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: all 0.5s ease;
+    position: relative;
   }
 
   h1 { color: #ff4d6d; margin-bottom: 40px; }
@@ -39,7 +39,7 @@
     display: flex;
     justify-content: center;
     gap: 20px;
-    height: 60px;
+    height: 80px;
     width: 100%;
   }
 
@@ -50,30 +50,38 @@
     border-radius: 30px;
     border: none;
     cursor: pointer;
-    transition: 0.2s;
   }
 
-  #yesBtn, #nextBtn { background-color: #ff4d6d; color: white; }
-  #noBtn { background-color: #ccc; color: black; }
+  #yesBtn, #nextBtn { background-color: #ff4d6d; color: white; transition: 0.2s; }
+  #yesBtn:hover { transform: scale(1.1); }
   
+  /* Faster "No" button movement */
+  #noBtn { 
+    background-color: #ccc; 
+    color: black; 
+    transition: all 0.1s ease-out; /* Super fast transition */
+    z-index: 10;
+  }
+
   #nextBtn {
     margin-top: 20px;
     display: none;
     width: 150px;
   }
 
-  /* Heart Animation Styles */
+  /* Love Symbol (Heart) */
   .heart {
     background-color: #ff4d6d;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100px;
-    margin: 0 10px;
-    position: relative;
-    top: 0;
-    transform: rotate(-45deg);
     width: 100px;
+    position: relative;
+    transform: rotate(-45deg);
     cursor: pointer;
-    transition: transform 1s ease-in-out;
+    transition: transform 0.6s ease-in-out, opacity 0.5s ease;
+    margin: 60px auto;
   }
 
   .heart:before, .heart:after {
@@ -88,86 +96,12 @@
   .heart:before { top: -50px; left: 0; }
   .heart:after { left: 50px; top: 0; }
 
-  .rotate-heart {
-    transform: rotate(315deg) scale(1.2); /* Rotates 360 degrees from its -45 start */
-  }
-
-  .hidden { display: none !important; }
-</style>
-</head>
-
-<body>
-
-<div class="box" id="mainBox">
-  <div id="screen1">
-    <h1>Will you be my Valentine? 💖</h1>
-    <div class="btn-area" id="area">
-      <button id="yesBtn">Yes 😍</button>
-      <button id="noBtn">No 😜</button>
-    </div>
-    <div id="msg" style="margin-top: 25px; font-size: 20px; color: #ff4d6d; display: none;">
-        Yayyyy!!! You made my day 🥰💘
-    </div>
-    <button id="nextBtn">Next ➔</button>
-  </div>
-
-  <div id="screen2" class="hidden">
-    <div id="heartIcon" class="heart"></div>
-    <h1 id="dinnerInvite" class="hidden" style="margin-top: 60px;">Can we go out for a dinner? 🍷✨</h1>
-  </div>
-</div>
-
-<script>
-  const noBtn = document.getElementById("noBtn");
-  const yesBtn = document.getElementById("yesBtn");
-  const nextBtn = document.getElementById("nextBtn");
-  const msg = document.getElementById("msg");
-  const area = document.getElementById("area");
-  
-  const screen1 = document.getElementById("screen1");
-  const screen2 = document.getElementById("screen2");
-  const heartIcon = document.getElementById("heartIcon");
-  const dinnerInvite = document.getElementById("dinnerInvite");
-
-  // "No" button escapes
-  function moveButton() {
-    const rect = area.getBoundingClientRect();
-    const maxX = rect.width - noBtn.offsetWidth;
-    const maxY = rect.height - noBtn.offsetHeight;
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
-
-    noBtn.style.position = "absolute";
-    noBtn.style.left = randomX + "px";
-    noBtn.style.top = randomY + "px";
-  }
-
-  noBtn.addEventListener("mouseenter", moveButton);
-
-  // "Yes" button clicked
-  yesBtn.addEventListener("click", () => {
-    msg.style.display = "block";
-    noBtn.style.display = "none";
-    yesBtn.style.display = "none";
-    nextBtn.style.display = "inline-block";
-  });
-
-  // "Next" button clicked
-  nextBtn.addEventListener("click", () => {
-    screen1.classList.add("hidden");
-    screen2.classList.remove("hidden");
-  });
-
-  // Heart click animation
-  heartIcon.addEventListener("click", () => {
-    heartIcon.classList.add("rotate-heart");
-    
-    // Show the dinner question after a short delay (once rotation finishes)
-    setTimeout(() => {
-      dinnerInvite.classList.remove("hidden");
-    }, 800);
-  });
-</script>
-
-</body>
-</html>
+  /* "Click Me" Text inside heart */
+  .heart span {
+    color: white;
+    transform: rotate(45deg); /* Counter-rotate text so it's readable */
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 2;
+    pointer-events: none;
+    white-space: nowrap;
